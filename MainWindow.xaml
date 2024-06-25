@@ -1,0 +1,139 @@
+﻿<Window x:Class="AnalyticsSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnalyticsSystem"
+        mc:Ignorable="d"
+        Title="Admin Panel" Height="800" Width="1200" WindowStartupLocation="CenterScreen" Icon="/Resources/MarketAnalyticLogo2.png" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="WatermarkTextBoxStyle" TargetType="TextBox">
+            <Style.Resources>
+                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                    <VisualBrush.Visual>
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}"
+                                   Foreground="LightGray"
+                                   Margin="5,0,0,0"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                            <ContentControl x:Name="CueBanner"
+                                            Content="{TemplateBinding Tag}"
+                                            IsHitTestVisible="False"
+                                            Focusable="False"
+                                            Opacity="0.7"
+                                            Background="{StaticResource CueBannerBrush}"
+                                            Visibility="Hidden"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="CueBanner" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="CueBanner" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <TabControl Margin="10">
+            <TabItem Header="Users">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBox x:Name="txtSearchUser" Width="200" Margin="5" Tag="Search Users..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchUser_TextChanged"/>
+                            <Button Content="Add User" Click="AddUser_Click" Margin="5"/>
+                            <Button Content="Edit User" Click="EditUser_Click" Margin="5"/>
+                            <Button Content="Delete User" Click="DeleteUser_Click" Margin="5"/>
+                        </StackPanel>
+                        <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding idUser}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Login" Binding="{Binding Login}"/>
+                                <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
+                                <DataGridTextColumn Header="Password" Binding="{Binding Password}"/>
+                                <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                                <DataGridTextColumn Header="Role" Binding="{Binding Role}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Projects">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBox x:Name="txtSearchProject" Width="200" Margin="5" Tag="Search Projects..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchProject_TextChanged"/>
+                            <Button Content="Add Project" Click="AddProject_Click" Margin="5"/>
+                            <Button Content="Edit Project" Click="EditProject_Click" Margin="5"/>
+                            <Button Content="Delete Project" Click="DeleteProject_Click" Margin="5"/>
+                        </StackPanel>
+                        <DataGrid x:Name="ProjectsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding IdProject}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}"/>
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}"/>
+                                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Tasks">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBox x:Name="txtSearchTask" Width="200" Margin="5" Tag="Search Tasks..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchTask_TextChanged"/>
+                            <Button Content="Add Task" Click="AddTask_Click" Margin="5"/>
+                            <Button Content="Edit Task" Click="EditTask_Click" Margin="5"/>
+                            <Button Content="Delete Task" Click="DeleteTask_Click" Margin="5"/>
+                        </StackPanel>
+                        <DataGrid x:Name="TasksDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding IdTask}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Task Name" Binding="{Binding TaskName}"/>
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                                <DataGridTextColumn Header="Project ID" Binding="{Binding ProjectId}"/>
+                                <DataGridTextColumn Header="Status ID" Binding="{Binding StatusId}"/>
+                                <DataGridTextColumn Header="Assigned To" Binding="{Binding AssignedTo}"/>
+                                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}"/>
+                                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Settings">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBox x:Name="txtSearchSetting" Width="200" Margin="5" Tag="Search Settings..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchSetting_TextChanged"/>
+                            <Button Content="Add Setting" Click="AddSetting_Click" Margin="5"/>
+                            <Button Content="Edit Setting" Click="EditSetting_Click" Margin="5"/>
+                            <Button Content="Delete Setting" Click="DeleteSetting_Click" Margin="5"/>
+                        </StackPanel>
+                        <DataGrid x:Name="SettingsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding IdSetting}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Setting Name" Binding="{Binding SettingName}"/>
+                                <DataGridTextColumn Header="Setting Value" Binding="{Binding SettingValue}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
