@@ -34,7 +34,7 @@ namespace AnalyticsSystem.AdminTools
             txtUsername.Text = user.Username;
             txtEmail.Text = user.Email;
             txtPhone.Text = user.Phone;
-            cbRole.SelectedIndex = user.Role == 1 ? 0 : 1; // Assuming Admin is 1 and User is 2
+            cbRole.SelectedIndex = user.Role == 1 ? 0 : 1; 
             txtPassword.Password = user.Password;
 
         }
@@ -56,12 +56,12 @@ namespace AnalyticsSystem.AdminTools
             User.Username = txtUsername.Text;
             User.Email = txtEmail.Text;
             User.Phone = txtPhone.Text;
-            User.Role = cbRole.SelectedIndex == 0 ? 1 : 2; // Assuming Admin is 1 and User is 2
+            User.Role = cbRole.SelectedIndex == 0 ? 1 : 2;
             User.Password = txtPassword.Password;
 
             if (!string.IsNullOrWhiteSpace(txtPassword.Password))
             {
-                User.Password = txtPassword.Password; // Assign password if provided
+                User.Password = txtPassword.Password; 
             }
 
             DialogResult = true;

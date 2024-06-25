@@ -45,7 +45,7 @@
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                 <GradientStop Color="#FF6699FF" Offset="0"/>
                 <GradientStop Color="#FF3366CC" Offset="0.5"/>
-                <GradientStop Color="#00BFBF" Offset="1"/>W
+                <GradientStop Color="#00BFBF" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
 
