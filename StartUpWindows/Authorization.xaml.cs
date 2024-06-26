@@ -64,6 +64,7 @@ namespace AnalyticsSystem.StartUpWindows
                     switch (user.Role)
                     {
                         case 1:
+                            App.Current.Properties["idAdmin"] = user.idUser;
                             MessageBox.Show($"Приветствую Администратора, {user.Username}",
                     "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information); ;
                             new MainWindow().Show();

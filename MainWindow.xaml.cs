@@ -14,6 +14,8 @@ namespace AnalyticsSystem
 {
     public partial class MainWindow : System.Windows.Window
     {
+        private Users CurrentUser { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -23,6 +25,28 @@ namespace AnalyticsSystem
         private void LoadData()
         {
             UsersDataGrid.ItemsSource = AppConnect.analyticsSystemEntities.Users.ToList();
+
+            if (App.Current.Properties["idAdmin"] is int userId)
+            {
+                CurrentUser = AppConnect.analyticsSystemEntities.Users.FirstOrDefault(u => u.idUser == userId);
+
+                if (CurrentUser != null)
+                {
+                    UserNameTextBlock.Text = $"Приветствую администратора, {CurrentUser.Username}!";
+
+                    var notificationsFromDb = AppConnect.analyticsSystemEntities.Notifications
+                                               .Where(n => n.idUser == CurrentUser.idUser)
+                                               .ToList();
+                }
+                else
+                {
+                    UserNameTextBlock.Text = "Пользователь не найден.";
+                }
+            }
+            else
+            {
+                UserNameTextBlock.Text = "Не удалось определить текущего пользователя.";
+            }
         }
 
         private void txtSearchUser_TextChanged(object sender, TextChangedEventArgs e)
@@ -151,9 +175,26 @@ namespace AnalyticsSystem
         }
 
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
+            new MainWindow().Show();
+            this.Close();
+        }
 
+        private void MetricsMenu_Click(object sender, RoutedEventArgs e)
+        {
+            new MetriksAdmin().Show();
+            this.Close();
+        }
+
+        private void OrdersMenu_Click(object sender, RoutedEventArgs e)
+        {
+            // Navigation code for orders menu
+        }
+
+        private void SettingsMenu_Click(object sender, RoutedEventArgs e)
+        {
+            // Navigation code for settings menu
         }
     }
 }

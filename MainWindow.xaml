@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalyticsSystem"
         mc:Ignorable="d"
-        Title="Admin Panel" Height="800" Width="1200" WindowStartupLocation="CenterScreen" Icon="/Resources/MarketAnalyticLogo2.png" ResizeMode="NoResize">
+        Title="Админ-Страница Пользователи.MonitoringAnalyticsSystem" Height="800" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/Resources/MarketAnalyticLogo2.png"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Window.Resources>
         <Style x:Key="WatermarkTextBoxStyle" TargetType="TextBox">
             <Style.Resources>
@@ -52,44 +53,73 @@
                 <GradientStop Color="#00BFBF" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <TabControl Margin="10,10,10,10" SelectionChanged="TabControl_SelectionChanged">
-            <TabItem Header="Users">
-                <Grid>
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBox x:Name="txtSearchUser" BorderThickness="5" BorderBrush="Black" Width="250" Margin="5" Tag="Search Users..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchUser_TextChanged"/>
-                            <Button Background="White" BorderThickness="0" Click="RefreshUsers_Click" Margin="5">
-                                <Image Source="/Resources/refresh.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="AddUser_Click" Margin="5">
-                                <Image Source="/Resources/add.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="EditUser_Click" Margin="5">
-                                <Image Source="/Resources/edit.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="DeleteUser_Click" Margin="5">
-                                <Image Source="/Resources/delete.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="ExportUsersToExcel_Click" Margin="5">
-                                <Image Source="/Resources/Excel.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            
-                        </StackPanel>
-                        <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding idUser}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Login" Binding="{Binding Login}"/>
-                                <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
-                                <DataGridTextColumn Header="Password" Binding="{Binding Password}"/>
-                                <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
-                                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
-                                <DataGridTextColumn Header="Role" Binding="{Binding Role}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-        </TabControl>
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Система мониторинга и аналитики" 
+                   FontSize="24" FontWeight="Bold" 
+                   Foreground="White" 
+                   HorizontalAlignment="Center" 
+                   Margin="10"/>
+
+        <Menu Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Background="Transparent">
+            <Menu.Resources>
+                <Style x:Key="GlowingMenuItemStyle" TargetType="MenuItem">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="White" BlurRadius="-5" ShadowDepth="1" />
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Menu.Resources>
+            <MenuItem Header="Пользователи"  Click="MainMenu_Click" Style="{StaticResource GlowingMenuItemStyle}"/>
+            <MenuItem Header="Метрики" Click="MetricsMenu_Click"/>
+            <MenuItem Header="Мои заказы" Click="OrdersMenu_Click"/>
+            <MenuItem Header="Настройки" Click="SettingsMenu_Click"/>
+        </Menu>
+
+        <StackPanel Grid.Row="2" Margin="20">
+            <TextBlock x:Name="UserNameTextBlock"
+                       FontSize="18" 
+                       FontWeight="Bold" 
+                       Foreground="White" 
+                       Margin="0,10,0,10"/>
+
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBox x:Name="txtSearchUser" BorderThickness="5" BorderBrush="Black" Width="250" Margin="5" Tag="Search Users..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchUser_TextChanged"/>
+                    <Button Background="Transparent" BorderThickness="0" Click="RefreshUsers_Click" Margin="5">
+                        <Image Source="/Resources/refresh.png" Stretch="Uniform" Height="24" Width="24"/>
+                    </Button>
+                    <Button Background="Transparent" BorderThickness="0" Click="AddUser_Click" Margin="5">
+                        <Image Source="/Resources/add.png" Stretch="Uniform" Height="24" Width="24"/>
+                    </Button>
+                    <Button Background="Transparent" BorderThickness="0" Click="EditUser_Click" Margin="5">
+                        <Image Source="/Resources/edit.png" Stretch="Uniform" Height="24" Width="24"/>
+                    </Button>
+                    <Button Background="Transparent" BorderThickness="0" Click="DeleteUser_Click" Margin="5">
+                        <Image Source="/Resources/delete.png" Stretch="Uniform" Height="24" Width="24"/>
+                    </Button>
+                    <Button Background="Transparent" BorderThickness="0" Click="ExportUsersToExcel_Click" Margin="5">
+                        <Image Source="/Resources/Excel.png" Stretch="Uniform" Height="24" Width="24"/>
+                    </Button>
+                </StackPanel>
+                <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding idUser}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Login" Binding="{Binding Login}"/>
+                        <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
+                        <DataGridTextColumn Header="Password" Binding="{Binding Password}"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                        <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                        <DataGridTextColumn Header="Role" Binding="{Binding Role}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

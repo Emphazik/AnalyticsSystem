@@ -1,20 +1,31 @@
 ﻿using AnalyticsSystem.ApplicationData;
 using AnalyticsSystem.Models;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Data.Entity;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
-namespace AnalyticsSystem.UsersWindows
+namespace AnalyticsSystem.AdminTools
 {
-    public partial class Metriks : Window
+    /// <summary>
+    /// Логика взаимодействия для MetriksAdmin.xaml
+    /// </summary>
+    public partial class MetriksAdmin : Window
     {
         private ObservableCollection<SystemMetrics> Metrics { get; set; }
         private ObservableCollection<SystemMetrics> FilteredMetrics { get; set; }
 
-        public Metriks()
+        public MetriksAdmin()
         {
             InitializeComponent();
             LoadMetrics();
@@ -54,6 +65,74 @@ namespace AnalyticsSystem.UsersWindows
             {
                 FilteredMetrics.Add(metrics);
             }
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            var addMetriksWindow = new AddMetriks();
+            addMetriksWindow.MetricAdded += OnMetricAdded;
+            addMetriksWindow.ShowDialog();
+        }
+
+        private void OnMetricAdded(object sender, EventArgs e)
+        {
+            // Обновление ListView после добавления метрики
+            LoadMetrics();
+        }
+
+        private void EditBook_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                SystemMetrics book = button.DataContext as SystemMetrics;
+                if (book != null)
+                {
+                    // edit = new EditBooks(book);
+                    //edit.Show();
+                    //this.Close();
+
+                    //LoadMetrics();
+                }
+            }
+        }
+
+        private void DeleteBook_Click(object sender, RoutedEventArgs e)
+        {
+            //var button = sender as Button;
+            //if (button != null)
+            //{
+            //    var book = button.DataContext as Books;
+            //    if (book != null)
+            //    {
+            //        if (MessageBox.Show($"Вы точно хотите удалить книгу '{book.Title}'?", "Подтверждение удаления",
+            //            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            //        {
+            //            try
+            //            {
+            //                using (var context = new BookStoreHEntities())
+            //                {
+            //                    var existingBook = context.Books.Find(book.idBook);
+            //                    if (existingBook != null)
+            //                    {
+            //                        context.Books.Remove(existingBook);
+            //                        context.SaveChanges();
+            //                        MessageBox.Show("Книга успешно удалена");
+            //                        LoadBooks();
+            //                    }
+            //                    else
+            //                    {
+            //                        MessageBox.Show("Книга не найдена в базе данных");
+            //                    }
+            //                }
+            //            }
+            //            catch (Exception ex)
+            //            {
+            //                MessageBox.Show($"Ошибка удаления книги: {ex.Message}");
+            //            }
+            //        }
+            //    }
+            //}
         }
 
         private void Info_Click(object sender, RoutedEventArgs e)
@@ -219,32 +298,24 @@ namespace AnalyticsSystem.UsersWindows
 
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
-            new Polzovatel().Show();
+            new MainWindow().Show();
             this.Close();
         }
 
         private void MetricsMenu_Click(object sender, RoutedEventArgs e)
         {
-            new Metriks().Show();
-            this.Close();
-        }
-
-        private void CartMenu_Click(object sender, RoutedEventArgs e)
-        {
-            new Cart().Show();
+            new MetriksAdmin().Show();
             this.Close();
         }
 
         private void OrdersMenu_Click(object sender, RoutedEventArgs e)
         {
-            new OrderList().Show();
-            this.Close();
+            // Navigation code for orders menu
         }
 
         private void SettingsMenu_Click(object sender, RoutedEventArgs e)
         {
-            // Открываем окно Настроек
+            // Navigation code for settings menu
         }
     }
-
 }

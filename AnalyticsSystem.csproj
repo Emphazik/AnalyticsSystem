@@ -77,6 +77,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminTools\AddMetriks.xaml.cs">
+      <DependentUpon>AddMetriks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminTools\MetriksAdmin.xaml.cs">
+      <DependentUpon>MetriksAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminTools\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
@@ -158,6 +164,14 @@
     <Compile Include="UsersWindows\Polzovatel.xaml.cs">
       <DependentUpon>Polzovatel.xaml</DependentUpon>
     </Compile>
+    <Page Include="AdminTools\AddMetriks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminTools\MetriksAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminTools\UserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -255,6 +269,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\update.png" />
+    <Resource Include="Resources\info.png" />
     <Resource Include="Resources\close.png" />
     <Resource Include="Resources\buyToCart.png" />
     <Resource Include="Resources\disk.png" />
