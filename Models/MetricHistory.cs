@@ -12,14 +12,13 @@ namespace AnalyticsSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TaskHistory
+    public partial class MetricHistory
     {
-        public int idHistory { get; set; }
-        public int TaskId { get; set; }
-        public int StatusId { get; set; }
-        public System.DateTime ChangeDate { get; set; }
+        public int idMetricHistory { get; set; }
+        public Nullable<int> idMetric { get; set; }
+        public string MetricValue { get; set; }
+        public System.DateTime Timestamp { get; set; }
     
-        public virtual TaskStatus TaskStatus { get; set; }
-        public virtual Tasks Tasks { get; set; }
+        public virtual SystemMetrics SystemMetrics { get; set; }
     }
 }

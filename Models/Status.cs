@@ -12,14 +12,18 @@ namespace AnalyticsSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Reports
+    public partial class Status
     {
-        public int idReport { get; set; }
-        public string ReportName { get; set; }
-        public int TemplateId { get; set; }
-        public System.DateTime GeneratedDate { get; set; }
-        public string ReportData { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Status()
+        {
+            this.Orders = new HashSet<Orders>();
+        }
     
-        public virtual ReportTemplates ReportTemplates { get; set; }
+        public int idStatus { get; set; }
+        public string StatusName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

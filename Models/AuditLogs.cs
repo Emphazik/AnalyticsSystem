@@ -12,11 +12,13 @@ namespace AnalyticsSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Metrics
+    public partial class AuditLogs
     {
-        public int idMetric { get; set; }
-        public string MetricName { get; set; }
-        public double MetricValue { get; set; }
-        public System.DateTime MeasuredDate { get; set; }
+        public int idAuditLog { get; set; }
+        public Nullable<int> idUser { get; set; }
+        public string Action { get; set; }
+        public System.DateTime Timestamp { get; set; }
+    
+        public virtual Users Users { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace AnalyticsSystem.StartUpWindows
 {
@@ -212,6 +213,7 @@ namespace AnalyticsSystem.StartUpWindows
             if (txtPassword.Password != txtConfirmPassword.Password)
             {
                 errorMessage = "Пароли не совпадают.";
+                txtConfirmPassword.Background = Brushes.Red;
                 return false;
             }
 

@@ -12,27 +12,20 @@ namespace AnalyticsSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Tasks
+    public partial class Devices
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tasks()
+        public Devices()
         {
-            this.TaskHistory = new HashSet<TaskHistory>();
+            this.UserDevices = new HashSet<UserDevices>();
         }
     
-        public int idTask { get; set; }
-        public string TaskName { get; set; }
-        public string Description { get; set; }
-        public int ProjectId { get; set; }
-        public int StatusId { get; set; }
-        public int AssignedTo { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public int idDevice { get; set; }
+        public string DeviceName { get; set; }
+        public string DeviceType { get; set; }
+        public string Manufacturer { get; set; }
     
-        public virtual Projects Projects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaskHistory> TaskHistory { get; set; }
-        public virtual Users Users { get; set; }
-        public virtual TaskStatus TaskStatus { get; set; }
+        public virtual ICollection<UserDevices> UserDevices { get; set; }
     }
 }

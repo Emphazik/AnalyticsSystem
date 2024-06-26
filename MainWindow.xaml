@@ -45,12 +45,19 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <TabControl Margin="10">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Color="#FF6699FF" Offset="0"/>
+                <GradientStop Color="#FF3366CC" Offset="0.5"/>
+                <GradientStop Color="#00BFBF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <TabControl Margin="10,10,10,10" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Users">
                 <Grid>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBox x:Name="txtSearchUser" Width="250" Margin="5" Tag="Search Users..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchUser_TextChanged"/>
+                            <TextBox x:Name="txtSearchUser" BorderThickness="5" BorderBrush="Black" Width="250" Margin="5" Tag="Search Users..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchUser_TextChanged"/>
                             <Button Background="White" BorderThickness="0" Click="RefreshUsers_Click" Margin="5">
                                 <Image Source="/Resources/refresh.png" Stretch="Uniform" Height="24" Width="24"/>
                             </Button>
@@ -77,106 +84,6 @@
                                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
                                 <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
                                 <DataGridTextColumn Header="Role" Binding="{Binding Role}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Projects">
-                <Grid>
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBox x:Name="txtSearchProject" Width="250" Margin="5" Tag="Search Projects..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchProject_TextChanged"/>
-                            <Button Background="White" BorderThickness="0" Click="RefreshProjects_Click" Margin="5">
-                                <Image Source="/Resources/refresh.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="AddProject_Click" Margin="5">
-                                <Image Source="/Resources/add.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="EditProject_Click" Margin="5">
-                                <Image Source="/Resources/edit.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="DeleteProject_Click" Margin="5">
-                                <Image Source="/Resources/delete.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="ExportProjectsToExcel_Click" Margin="5">
-                                <Image Source="/Resources/Excel.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                        </StackPanel>
-                        <DataGrid x:Name="ProjectsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding IdProject}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}"/>
-                                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}"/>
-                                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Tasks">
-                <Grid>
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBox x:Name="txtSearchTask" Width="250" Margin="5" Tag="Search Tasks..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchTask_TextChanged"/>
-                            <Button Background="White" BorderThickness="0" Click="RefreshTasks_Click" Margin="5">
-                                <Image Source="/Resources/refresh.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="AddTask_Click" Margin="5">
-                                <Image Source="/Resources/add.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="EditTask_Click" Margin="5">
-                                <Image Source="/Resources/edit.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="DeleteTask_Click" Margin="5">
-                                <Image Source="/Resources/delete.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="ExportTasksToExcel_Click" Margin="5">
-                                <Image Source="/Resources/Excel.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                        </StackPanel>
-                        <DataGrid x:Name="TasksDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding IdTask}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Task Name" Binding="{Binding TaskName}"/>
-                                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                                <DataGridTextColumn Header="Project ID" Binding="{Binding ProjectId}"/>
-                                <DataGridTextColumn Header="Status ID" Binding="{Binding StatusId}"/>
-                                <DataGridTextColumn Header="Assigned To" Binding="{Binding AssignedTo}"/>
-                                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}"/>
-                                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Settings">
-                <Grid>
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBox x:Name="txtSearchSetting" Width="250" Margin="5" Tag="Search Settings..." Style="{StaticResource WatermarkTextBoxStyle}" TextChanged="txtSearchSetting_TextChanged"/>
-                            <Button Background="White" BorderThickness="0" Click="RefreshSettings_Click" Margin="5">
-                                <Image Source="/Resources/refresh.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="AddSetting_Click" Margin="5">
-                                <Image Source="/Resources/add.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="EditSetting_Click" Margin="5">
-                                <Image Source="/Resources/edit.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="DeleteSetting_Click" Margin="5">
-                                <Image Source="/Resources/delete.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                            <Button Background="White" BorderThickness="0" Click="ExportSettingsToExcel_Click" Margin="5">
-                                <Image Source="/Resources/Excel.png" Stretch="Uniform" Height="24" Width="24"/>
-                            </Button>
-                        </StackPanel>
-                        <DataGrid x:Name="SettingsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding IdSetting}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Setting Name" Binding="{Binding SettingName}"/>
-                                <DataGridTextColumn Header="Setting Value" Binding="{Binding SettingValue}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>

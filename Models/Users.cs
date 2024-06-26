@@ -17,9 +17,11 @@ namespace AnalyticsSystem.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
         {
-            this.Logs = new HashSet<Logs>();
-            this.Tasks = new HashSet<Tasks>();
-            this.UserNotifications = new HashSet<UserNotifications>();
+            this.AuditLogs = new HashSet<AuditLogs>();
+            this.Cart = new HashSet<Cart>();
+            this.Notifications = new HashSet<Notifications>();
+            this.Orders = new HashSet<Orders>();
+            this.UserDevices = new HashSet<UserDevices>();
         }
     
         public int idUser { get; set; }
@@ -30,12 +32,16 @@ namespace AnalyticsSystem.Models
         public string Email { get; set; }
         public string Phone { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Logs> Logs { get; set; }
         public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tasks> Tasks { get; set; }
+        public virtual ICollection<AuditLogs> AuditLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserNotifications> UserNotifications { get; set; }
+        public virtual ICollection<Cart> Cart { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notifications> Notifications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserDevices> UserDevices { get; set; }
     }
 }

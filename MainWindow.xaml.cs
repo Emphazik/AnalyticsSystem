@@ -23,9 +23,6 @@ namespace AnalyticsSystem
         private void LoadData()
         {
             UsersDataGrid.ItemsSource = AppConnect.analyticsSystemEntities.Users.ToList();
-            ProjectsDataGrid.ItemsSource = AppConnect.analyticsSystemEntities.Projects.ToList();
-            TasksDataGrid.ItemsSource = AppConnect.analyticsSystemEntities.Tasks.ToList();
-            SettingsDataGrid.ItemsSource = AppConnect.analyticsSystemEntities.Settings.ToList();
         }
 
         private void txtSearchUser_TextChanged(object sender, TextChangedEventArgs e)
@@ -39,36 +36,7 @@ namespace AnalyticsSystem
                 .ToList();
             UsersDataGrid.ItemsSource = filteredUsers;
         }
-
-        private void txtSearchTask_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string filter = txtSearchTask.Text.ToLower();
-            var filteredTasks = AppConnect.analyticsSystemEntities.Tasks
-                .Where(t => t.TaskName.ToLower().Contains(filter) ||
-                            t.Description.ToLower().Contains(filter))
-                .ToList();
-            TasksDataGrid.ItemsSource = filteredTasks;
-        }
-
-        private void txtSearchProject_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string filter = txtSearchProject.Text.ToLower();
-            var filteredProjects = AppConnect.analyticsSystemEntities.Projects
-                .Where(p => p.ProjectName.ToLower().Contains(filter) ||
-                            p.Description.ToLower().Contains(filter))
-                .ToList();
-            ProjectsDataGrid.ItemsSource = filteredProjects;
-        }
-
-        private void txtSearchSetting_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string filter = txtSearchSetting.Text.ToLower();
-            var filteredSettings = AppConnect.analyticsSystemEntities.Settings
-                .Where(s => s.SettingName.ToLower().Contains(filter) ||
-                            s.SettingValue.ToLower().Contains(filter))
-                .ToList();
-            SettingsDataGrid.ItemsSource = filteredSettings;
-        }
+     
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
@@ -129,166 +97,7 @@ namespace AnalyticsSystem
             }
         }
 
-        private void AddProject_Click(object sender, RoutedEventArgs e)
-        {
-            //var newProjectWindow = new ProjectWindow(); 
-            //if (newProjectWindow.ShowDialog() == true)
-            //{
-            //    var newProject = newProjectWindow.Project;
-            //    AppConnect.analyticsSystemEntities.Projects.Add(newProject);
-            //    AppConnect.analyticsSystemEntities.SaveChanges();
-            //    LoadData();
-            //}
-        }
-
-        private void EditProject_Click(object sender, RoutedEventArgs e)
-        {
-            //if (ProjectsDataGrid.SelectedItem is Projects selectedProject)
-            //{
-            //    var editProjectWindow = new ProjectWindow(selectedProject); 
-            //    if (editProjectWindow.ShowDialog() == true)
-            //    {
-            //        var updatedProject = editProjectWindow.Project;
-            //        var project = AppConnect.analyticsSystemEntities.Projects.Find(updatedProject.IdProject);
-            //        if (project != null)
-            //        {
-            //            project.ProjectName = updatedProject.ProjectName;
-            //            project.Description = updatedProject.Description;
-            //            project.StartDate = updatedProject.StartDate;
-            //            project.EndDate = updatedProject.EndDate;
-
-            //            AppConnect.analyticsSystemEntities.SaveChanges();
-            //            LoadData();
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please select a project to edit.");
-            //}
-        }
-
-        private void DeleteProject_Click(object sender, RoutedEventArgs e)
-        {
-            //if (ProjectsDataGrid.SelectedItem is Projects selectedProject)
-            //{
-            //    AppConnect.analyticsSystemEntities.Projects.Remove(selectedProject);
-            //    AppConnect.analyticsSystemEntities.SaveChanges();
-            //    LoadData();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please select a project to delete.");
-            //}
-        }
-
-        private void AddTask_Click(object sender, RoutedEventArgs e)
-        {
-            //var newTaskWindow = new TaskWindow(); 
-            //if (newTaskWindow.ShowDialog() == true)
-            //{
-            //    var newTask = newTaskWindow.Task;
-            //    AppConnect.analyticsSystemEntities.Tasks.Add(newTask);
-            //    AppConnect.analyticsSystemEntities.SaveChanges();
-            //    LoadData();
-            //}
-        }
-
-        private void EditTask_Click(object sender, RoutedEventArgs e)
-        {
-            //if (TasksDataGrid.SelectedItem is Tasks selectedTask)
-            //{
-            //    var editTaskWindow = new TaskWindow(selectedTask); 
-            //    if (editTaskWindow.ShowDialog() == true)
-            //    {
-            //        var updatedTask = editTaskWindow.Task;
-            //        var task = AppConnect.analyticsSystemEntities.Tasks.Find(updatedTask.IdTask);
-            //        if (task != null)
-            //        {
-            //            task.TaskName = updatedTask.TaskName;
-            //            task.Description = updatedTask.Description;
-            //            task.ProjectId = updatedTask.ProjectId;
-            //            task.StatusId = updatedTask.StatusId;
-            //            task.AssignedTo = updatedTask.AssignedTo;
-            //            task.StartDate = updatedTask.StartDate;
-            //            task.EndDate = updatedTask.EndDate;
-
-            //            AppConnect.analyticsSystemEntities.SaveChanges();
-            //            LoadData();
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please select a task to edit.");
-            //}
-        }
-
-        private void DeleteTask_Click(object sender, RoutedEventArgs e)
-        {
-            //if (TasksDataGrid.SelectedItem is Tasks selectedTask)
-            //{
-            //    AppConnect.analyticsSystemEntities.Tasks.Remove(selectedTask);
-            //    AppConnect.analyticsSystemEntities.SaveChanges();
-            //    LoadData();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please select a task to delete.");
-            //}
-        }
-
-        private void AddSetting_Click(object sender, RoutedEventArgs e)
-        {
-            //var newSettingWindow = new SettingWindow(); 
-            //if (newSettingWindow.ShowDialog() == true)
-            //{
-            //    var newSetting = newSettingWindow.Setting;
-            //    AppConnect.analyticsSystemEntities.Settings.Add(newSetting);
-            //    AppConnect.analyticsSystemEntities.SaveChanges();
-            //    LoadData();
-            //}
-        }
-
-        private void EditSetting_Click(object sender, RoutedEventArgs e)
-        {
-            //if (SettingsDataGrid.SelectedItem is Settings selectedSetting)
-            //{
-            //    var editSettingWindow = new SettingWindow(selectedSetting); 
-            //    if (editSettingWindow.ShowDialog() == true)
-            //    {
-            //        var updatedSetting = editSettingWindow.Setting;
-            //        var setting = AppConnect.analyticsSystemEntities.Settings.Find(updatedSetting.IdSetting);
-            //        if (setting != null)
-            //        {
-            //            setting.SettingName = updatedSetting.SettingName;
-            //            setting.SettingValue = updatedSetting.SettingValue;
-
-            //            AppConnect.analyticsSystemEntities.SaveChanges();
-            //            LoadData();
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please select a setting to edit.");
-            //}
-        }
-
-        private void DeleteSetting_Click(object sender, RoutedEventArgs e)
-        {
-            if (SettingsDataGrid.SelectedItem is Settings selectedSetting)
-            {
-                AppConnect.analyticsSystemEntities.Settings.Remove(selectedSetting);
-                AppConnect.analyticsSystemEntities.SaveChanges();
-                LoadData();
-            }
-            else
-            {
-                MessageBox.Show("Please select a setting to delete.");
-            }
-        }
-
+     
         private void ExportToExcel<T>(DataGrid dataGrid)
         {
             var saveFileDialog = new Microsoft.Win32.SaveFileDialog
@@ -335,39 +144,16 @@ namespace AnalyticsSystem
             ExportToExcel<Users>(UsersDataGrid);
         }
 
-        private void ExportProjectsToExcel_Click(object sender, RoutedEventArgs e)
-        {
-            ExportToExcel<Projects>(ProjectsDataGrid);
-        }
-
-        private void ExportTasksToExcel_Click(object sender, RoutedEventArgs e)
-        {
-            ExportToExcel<Tasks>(TasksDataGrid);
-        }
-
-        private void ExportSettingsToExcel_Click(object sender, RoutedEventArgs e)
-        {
-            ExportToExcel<Settings>(SettingsDataGrid);
-        }
 
         private void RefreshUsers_Click(object sender, RoutedEventArgs e)
         {
             LoadData();
         }
 
-        private void RefreshTasks_Click(object sender, RoutedEventArgs e)
-        {
-            LoadData();
-        }
 
-        private void RefreshProjects_Click(object sender, RoutedEventArgs e)
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LoadData();
-        }
 
-        private void RefreshSettings_Click(object sender, RoutedEventArgs e)
-        {
-            LoadData();
         }
     }
 }

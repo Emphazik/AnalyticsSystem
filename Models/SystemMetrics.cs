@@ -12,19 +12,28 @@ namespace AnalyticsSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ReportTemplates
+    public partial class SystemMetrics
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ReportTemplates()
+        public SystemMetrics()
         {
-            this.Reports = new HashSet<Reports>();
+            this.CartItems = new HashSet<CartItems>();
+            this.MetricHistory = new HashSet<MetricHistory>();
+            this.Cart = new HashSet<Cart>();
         }
     
-        public int idTemplate { get; set; }
-        public string TemplateName { get; set; }
-        public string TemplateData { get; set; }
+        public int idMetric { get; set; }
+        public string MetricName { get; set; }
+        public string MetricValue { get; set; }
+        public System.DateTime Timestamp { get; set; }
+        public decimal Price { get; set; }
+        public string ImageURL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reports> Reports { get; set; }
+        public virtual ICollection<CartItems> CartItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MetricHistory> MetricHistory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Cart { get; set; }
     }
 }

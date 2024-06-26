@@ -12,21 +12,24 @@ namespace AnalyticsSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TaskStatus
+    public partial class Cart
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TaskStatus()
+        public Cart()
         {
-            this.TaskHistory = new HashSet<TaskHistory>();
-            this.Tasks = new HashSet<Tasks>();
+            this.CartItems = new HashSet<CartItems>();
         }
     
-        public int idStatus { get; set; }
-        public string StatusName { get; set; }
+        public int idCart { get; set; }
+        public Nullable<int> idUser { get; set; }
+        public Nullable<decimal> TotalPrice { get; set; }
+        public Nullable<int> idOrder { get; set; }
+        public Nullable<int> idMetric { get; set; }
     
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaskHistory> TaskHistory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tasks> Tasks { get; set; }
+        public virtual ICollection<CartItems> CartItems { get; set; }
+        public virtual Orders Orders { get; set; }
+        public virtual SystemMetrics SystemMetrics { get; set; }
     }
 }

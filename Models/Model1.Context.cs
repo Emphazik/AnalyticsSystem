@@ -25,18 +25,19 @@ namespace AnalyticsSystem.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Logs> Logs { get; set; }
-        public virtual DbSet<Metrics> Metrics { get; set; }
-        public virtual DbSet<Notifications> Notifications { get; set; }
-        public virtual DbSet<Projects> Projects { get; set; }
-        public virtual DbSet<Reports> Reports { get; set; }
-        public virtual DbSet<ReportTemplates> ReportTemplates { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
-        public virtual DbSet<Settings> Settings { get; set; }
-        public virtual DbSet<TaskHistory> TaskHistory { get; set; }
-        public virtual DbSet<Tasks> Tasks { get; set; }
-        public virtual DbSet<TaskStatus> TaskStatus { get; set; }
-        public virtual DbSet<UserNotifications> UserNotifications { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<AuditLogs> AuditLogs { get; set; }
+        public virtual DbSet<Cart> Cart { get; set; }
+        public virtual DbSet<CartItems> CartItems { get; set; }
+        public virtual DbSet<Devices> Devices { get; set; }
+        public virtual DbSet<MetricHistory> MetricHistory { get; set; }
+        public virtual DbSet<Notifications> Notifications { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<PaymentDetails> PaymentDetails { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<SystemMetrics> SystemMetrics { get; set; }
+        public virtual DbSet<UserDevices> UserDevices { get; set; }
     }
 }

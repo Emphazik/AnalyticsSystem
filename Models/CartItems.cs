@@ -12,13 +12,17 @@ namespace AnalyticsSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Notifications
+    public partial class CartItems
     {
-        public int idNotification { get; set; }
-        public Nullable<int> idUser { get; set; }
-        public string Message { get; set; }
-        public bool Read { get; set; }
+        public int idCartItem { get; set; }
+        public Nullable<int> idCart { get; set; }
+        public Nullable<int> idMetric { get; set; }
+        public string MetricName { get; set; }
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+        public decimal TotalPrice { get; set; }
     
-        public virtual Users Users { get; set; }
+        public virtual Cart Cart { get; set; }
+        public virtual SystemMetrics SystemMetrics { get; set; }
     }
 }

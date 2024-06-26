@@ -1,4 +1,5 @@
-﻿using AnalyticsSystem.ApplicationData;
+﻿using AnalyticsSystem.UsersWindows;
+using AnalyticsSystem.ApplicationData;
 using AnalyticsSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -72,7 +73,7 @@ namespace AnalyticsSystem.StartUpWindows
                             App.Current.Properties["idUser"] = user.idUser;
                             MessageBox.Show($"Приветствую Пользователя, {user.Username}",
                     "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            new MainWindow().Show();
+                            new Polzovatel().Show();
                             this.Close();
                             break;
                         default:

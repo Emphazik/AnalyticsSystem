@@ -12,14 +12,14 @@ namespace AnalyticsSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserNotifications
+    public partial class UserDevices
     {
-        public int idUserNotification { get; set; }
-        public int UserId { get; set; }
-        public int NotificationId { get; set; }
-        public Nullable<bool> IsRead { get; set; }
+        public int idUserDevice { get; set; }
+        public Nullable<int> idUser { get; set; }
+        public Nullable<int> idDevice { get; set; }
+        public string DeviceAlias { get; set; }
     
-        public virtual Notifications Notifications { get; set; }
+        public virtual Devices Devices { get; set; }
         public virtual Users Users { get; set; }
     }
 }

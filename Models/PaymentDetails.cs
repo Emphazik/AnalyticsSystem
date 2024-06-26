@@ -12,10 +12,14 @@ namespace AnalyticsSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Settings
+    public partial class PaymentDetails
     {
-        public int idSetting { get; set; }
-        public string SettingName { get; set; }
-        public string SettingValue { get; set; }
+        public int idPaymentDetail { get; set; }
+        public Nullable<int> idOrder { get; set; }
+        public string PaymentMethod { get; set; }
+        public System.DateTime PaymentDate { get; set; }
+        public decimal Amount { get; set; }
+    
+        public virtual Orders Orders { get; set; }
     }
 }
