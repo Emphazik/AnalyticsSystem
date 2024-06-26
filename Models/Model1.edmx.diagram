@@ -10,7 +10,6 @@
         <AssociationConnector Association="AnalyticsSystemModel.FK_Users_Role" ManuallyRouted="false" />
         <EntityTypeShape EntityType="AnalyticsSystemModel.sysdiagrams" Width="1.5" PointX="8.375" PointY="2.25" />
         <EntityTypeShape EntityType="AnalyticsSystemModel.AuditLogs" Width="1.5" PointX="3" PointY="8.125" />
-        <EntityTypeShape EntityType="AnalyticsSystemModel.Cart" Width="1.5" PointX="5.25" PointY="8.125" />
         <EntityTypeShape EntityType="AnalyticsSystemModel.CartItems" Width="1.5" PointX="7.5" PointY="9.75" />
         <EntityTypeShape EntityType="AnalyticsSystemModel.Devices" Width="1.5" PointX="8" PointY="14" />
         <EntityTypeShape EntityType="AnalyticsSystemModel.MetricHistory" Width="1.5" PointX="9.75" PointY="11.375" />
@@ -21,8 +20,6 @@
         <EntityTypeShape EntityType="AnalyticsSystemModel.SystemMetrics" Width="1.5" PointX="5.25" PointY="11.375" />
         <EntityTypeShape EntityType="AnalyticsSystemModel.UserDevices" Width="1.5" PointX="10.25" PointY="8.875" />
         <AssociationConnector Association="AnalyticsSystemModel.FK__AuditLogs__idUse__0E6E26BF" />
-        <AssociationConnector Association="AnalyticsSystemModel.FK__Cart__idUser__02084FDA" />
-        <AssociationConnector Association="AnalyticsSystemModel.FK__CartItems__idCar__0A9D95DB" />
         <AssociationConnector Association="AnalyticsSystemModel.FK__CartItems__idMet__0B91BA14" />
         <AssociationConnector Association="AnalyticsSystemModel.FK__UserDevic__idDev__245D67DE" />
         <AssociationConnector Association="AnalyticsSystemModel.FK__MetricHis__idMet__2739D489" />
@@ -31,6 +28,7 @@
         <AssociationConnector Association="AnalyticsSystemModel.FK__Orders__idUser__7E37BEF6" />
         <AssociationConnector Association="AnalyticsSystemModel.FK__PaymentDe__idOrd__14270015" />
         <AssociationConnector Association="AnalyticsSystemModel.FK__UserDevic__idUse__236943A5" />
+        <EntityTypeShape EntityType="AnalyticsSystemModel.Cart" Width="1.5" PointX="5.25" PointY="8.25" />
         <AssociationConnector Association="AnalyticsSystemModel.FK_Cart_Orders" />
         <AssociationConnector Association="AnalyticsSystemModel.FK_Cart_SystemMetrics" />
       </Diagram>

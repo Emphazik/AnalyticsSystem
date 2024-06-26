@@ -170,16 +170,17 @@ namespace AnalyticsSystem.UsersWindows
                             order = new Orders
                             {
                                 idUser = userId,
-                                idStatus = 2
+                                idStatus = 2,
+                                OrderDate = DateTime.Now // Add a valid date here if needed
                             };
                             context.Orders.Add(order);
                             context.SaveChanges();
                         }
 
-                        var cartItem = new Cart
+                        var cartItem = new AnalyticsSystem.Models.Cart
                         {
-                            IdOrder = order.idOrder,
-                            idMetric = selectedmetric.idMetric 
+                            idOrder = order.idOrder,
+                            idMetric = selectedmetric.idMetric
                         };
                         context.Cart.Add(cartItem);
                         context.SaveChanges();
@@ -197,6 +198,8 @@ namespace AnalyticsSystem.UsersWindows
                 MessageBox.Show("Произошла ошибка при добавлении метрики в корзину: " + ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
 
 
         private void MainMenu_Click(object sender, RoutedEventArgs e)

@@ -22,7 +22,6 @@ namespace AnalyticsSystem.Models
         public decimal Price { get; set; }
         public decimal TotalPrice { get; set; }
     
-        public virtual Cart Cart { get; set; }
         public virtual SystemMetrics SystemMetrics { get; set; }
     }
 }

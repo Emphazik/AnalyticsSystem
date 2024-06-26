@@ -14,21 +14,11 @@ namespace AnalyticsSystem.Models
     
     public partial class Cart
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cart()
-        {
-            this.CartItems = new HashSet<CartItems>();
-        }
-    
         public int idCart { get; set; }
-        public Nullable<int> idUser { get; set; }
-        public Nullable<decimal> TotalPrice { get; set; }
         public Nullable<int> idOrder { get; set; }
         public Nullable<int> idMetric { get; set; }
+        public string TotalPrice { get; set; }
     
-        public virtual Users Users { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CartItems> CartItems { get; set; }
         public virtual Orders Orders { get; set; }
         public virtual SystemMetrics SystemMetrics { get; set; }
     }

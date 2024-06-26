@@ -370,7 +370,6 @@
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Role" FromRole="Users" ToRole="Roles" />
           <NavigationProperty Name="AuditLogs" Relationship="AnalyticsSystemModel.FK__AuditLogs__idUse__0E6E26BF" FromRole="Users" ToRole="AuditLogs" />
-          <NavigationProperty Name="Cart" Relationship="AnalyticsSystemModel.FK__Cart__idUser__02084FDA" FromRole="Users" ToRole="Cart" />
           <NavigationProperty Name="Notifications" Relationship="AnalyticsSystemModel.FK__Notificat__idUse__114A936A" FromRole="Users" ToRole="Notifications" />
           <NavigationProperty Name="Orders" Relationship="AnalyticsSystemModel.FK__Orders__idUser__7E37BEF6" FromRole="Users" ToRole="Orders" />
           <NavigationProperty Name="UserDevices" Relationship="AnalyticsSystemModel.FK__UserDevic__idUse__236943A5" FromRole="Users" ToRole="UserDevices" />
@@ -396,7 +395,6 @@
           </AssociationSet>
           <EntitySet Name="sysdiagrams" EntityType="AnalyticsSystemModel.sysdiagrams" />
           <EntitySet Name="AuditLogs" EntityType="AnalyticsSystemModel.AuditLogs" />
-          <EntitySet Name="Cart" EntityType="AnalyticsSystemModel.Cart" />
           <EntitySet Name="CartItems" EntityType="AnalyticsSystemModel.CartItems" />
           <EntitySet Name="Devices" EntityType="AnalyticsSystemModel.Devices" />
           <EntitySet Name="MetricHistory" EntityType="AnalyticsSystemModel.MetricHistory" />
@@ -409,14 +407,6 @@
           <AssociationSet Name="FK__AuditLogs__idUse__0E6E26BF" Association="AnalyticsSystemModel.FK__AuditLogs__idUse__0E6E26BF">
             <End Role="Users" EntitySet="Users" />
             <End Role="AuditLogs" EntitySet="AuditLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cart__idUser__02084FDA" Association="AnalyticsSystemModel.FK__Cart__idUser__02084FDA">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CartItems__idCar__0A9D95DB" Association="AnalyticsSystemModel.FK__CartItems__idCar__0A9D95DB">
-            <End Role="Cart" EntitySet="Cart" />
-            <End Role="CartItems" EntitySet="CartItems" />
           </AssociationSet>
           <AssociationSet Name="FK__CartItems__idMet__0B91BA14" Association="AnalyticsSystemModel.FK__CartItems__idMet__0B91BA14">
             <End Role="SystemMetrics" EntitySet="SystemMetrics" />
@@ -450,6 +440,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserDevices" EntitySet="UserDevices" />
           </AssociationSet>
+          <EntitySet Name="Cart" EntityType="AnalyticsSystemModel.Cart" />
           <AssociationSet Name="FK_Cart_Orders" Association="AnalyticsSystemModel.FK_Cart_Orders">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="Cart" EntitySet="Cart" />
@@ -479,20 +470,6 @@
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Users" Relationship="AnalyticsSystemModel.FK__AuditLogs__idUse__0E6E26BF" FromRole="AuditLogs" ToRole="Users" />
         </EntityType>
-        <EntityType Name="Cart">
-          <Key>
-            <PropertyRef Name="idCart" />
-          </Key>
-          <Property Name="idCart" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idUser" Type="Int32" />
-          <Property Name="TotalPrice" Type="Decimal" />
-          <NavigationProperty Name="Users" Relationship="AnalyticsSystemModel.FK__Cart__idUser__02084FDA" FromRole="Cart" ToRole="Users" />
-          <NavigationProperty Name="CartItems" Relationship="AnalyticsSystemModel.FK__CartItems__idCar__0A9D95DB" FromRole="Cart" ToRole="CartItems" />
-          <Property Name="idOrder" Type="Int32" />
-          <Property Name="idMetric" Type="Int32" />
-          <NavigationProperty Name="Orders" Relationship="AnalyticsSystemModel.FK_Cart_Orders" FromRole="Cart" ToRole="Orders" />
-          <NavigationProperty Name="SystemMetrics" Relationship="AnalyticsSystemModel.FK_Cart_SystemMetrics" FromRole="Cart" ToRole="SystemMetrics" />
-        </EntityType>
         <EntityType Name="CartItems">
           <Key>
             <PropertyRef Name="idCartItem" />
@@ -504,7 +481,6 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <NavigationProperty Name="Cart" Relationship="AnalyticsSystemModel.FK__CartItems__idCar__0A9D95DB" FromRole="CartItems" ToRole="Cart" />
           <NavigationProperty Name="SystemMetrics" Relationship="AnalyticsSystemModel.FK__CartItems__idMet__0B91BA14" FromRole="CartItems" ToRole="SystemMetrics" />
         </EntityType>
         <EntityType Name="Devices">
@@ -606,30 +582,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cart__idUser__02084FDA">
-          <End Type="AnalyticsSystemModel.Users" Role="Users" Multiplicity="0..1" />
-          <End Type="AnalyticsSystemModel.Cart" Role="Cart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="idUser" />
-            </Principal>
-            <Dependent Role="Cart">
-              <PropertyRef Name="idUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CartItems__idCar__0A9D95DB">
-          <End Type="AnalyticsSystemModel.Cart" Role="Cart" Multiplicity="0..1" />
-          <End Type="AnalyticsSystemModel.CartItems" Role="CartItems" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cart">
-              <PropertyRef Name="idCart" />
-            </Principal>
-            <Dependent Role="CartItems">
-              <PropertyRef Name="idCart" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__CartItems__idMet__0B91BA14">
           <End Type="AnalyticsSystemModel.SystemMetrics" Role="SystemMetrics" Multiplicity="0..1" />
           <End Type="AnalyticsSystemModel.CartItems" Role="CartItems" Multiplicity="*" />
@@ -726,6 +678,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="idCart" />
+          </Key>
+          <Property Name="idCart" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idOrder" Type="Int32" />
+          <Property Name="idMetric" Type="Int32" />
+          <Property Name="TotalPrice" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="AnalyticsSystemModel.FK_Cart_Orders" FromRole="Cart" ToRole="Orders" />
+          <NavigationProperty Name="SystemMetrics" Relationship="AnalyticsSystemModel.FK_Cart_SystemMetrics" FromRole="Cart" ToRole="SystemMetrics" />
+        </EntityType>
         <Association Name="FK_Cart_Orders">
           <End Type="AnalyticsSystemModel.Orders" Role="Orders" Multiplicity="0..1" />
           <End Type="AnalyticsSystemModel.Cart" Role="Cart" Multiplicity="*" />
@@ -795,16 +758,6 @@
                 <ScalarProperty Name="Action" ColumnName="Action" />
                 <ScalarProperty Name="idUser" ColumnName="idUser" />
                 <ScalarProperty Name="idAuditLog" ColumnName="idAuditLog" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cart">
-            <EntityTypeMapping TypeName="AnalyticsSystemModel.Cart">
-              <MappingFragment StoreEntitySet="Cart">
-                <ScalarProperty Name="idMetric" ColumnName="idMetric" />
-                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="idCart" ColumnName="idCart" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -899,6 +852,16 @@
                 <ScalarProperty Name="idDevice" ColumnName="idDevice" />
                 <ScalarProperty Name="idUser" ColumnName="idUser" />
                 <ScalarProperty Name="idUserDevice" ColumnName="idUserDevice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="AnalyticsSystemModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="idMetric" ColumnName="idMetric" />
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+                <ScalarProperty Name="idCart" ColumnName="idCart" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -29,7 +29,6 @@ namespace AnalyticsSystem.Models
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<AuditLogs> AuditLogs { get; set; }
-        public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<CartItems> CartItems { get; set; }
         public virtual DbSet<Devices> Devices { get; set; }
         public virtual DbSet<MetricHistory> MetricHistory { get; set; }
@@ -39,5 +38,6 @@ namespace AnalyticsSystem.Models
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<SystemMetrics> SystemMetrics { get; set; }
         public virtual DbSet<UserDevices> UserDevices { get; set; }
+        public virtual DbSet<Cart> Cart { get; set; }
     }
 }
