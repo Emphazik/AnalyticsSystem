@@ -85,15 +85,31 @@ namespace AnalyticsSystem.AdminTools
             Button button = sender as Button;
             if (button != null)
             {
-                SystemMetrics book = button.DataContext as SystemMetrics;
-                if (book != null)
+                SystemMetrics metric = button.DataContext as SystemMetrics;
+                if (metric != null)
                 {
-                    // edit = new EditBooks(book);
-                    //edit.Show();
-                    //this.Close();
-
-                    //LoadMetrics();
+                    var editMetriksWindow = new EditMetriks(metric);
+                    editMetriksWindow.ShowDialog();
+                    LoadMetrics();
                 }
+            }
+        }
+
+        public void UpdateMetricInList(SystemMetrics updatedMetric)
+        {
+            var existingMetric = Metrics.FirstOrDefault(m => m.idMetric == updatedMetric.idMetric);
+            if (existingMetric != null)
+            {
+                // Обновляем значения существующей метрики
+                existingMetric.MetricName = updatedMetric.MetricName;
+                existingMetric.MetricValue = updatedMetric.MetricValue;
+                existingMetric.Timestamp = updatedMetric.Timestamp;
+                existingMetric.Price = updatedMetric.Price;
+                existingMetric.ImageURL = updatedMetric.ImageURL;
+
+                // Обновляем привязанную коллекцию
+                FilteredMetrics = new ObservableCollection<SystemMetrics>(Metrics);
+                metricsListView.ItemsSource = FilteredMetrics;
             }
         }
 
