@@ -1,0 +1,23 @@
+﻿<Window x:Class="AnalyticsSystem.UsersWindows.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnalyticsSystem.UsersWindows"
+        mc:Ignorable="d"
+            Title="Страница QR-CODE.MonitoringAnalyticsSystem" Height="600" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/Resources/MarketAnalyticLogo2.png" Loaded="Page_Loaded">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Color="#FF6699FF" Offset="0"/>
+                <GradientStop Color="#FF3366CC" Offset="0.5"/>
+                <GradientStop Color="#00BFBF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="346" Margin="211,144,0,0" VerticalAlignment="Top" Width="442"/>
+        <Label Content="QR код заказа" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Arial" FontSize="24"/>
+        <Button x:Name="close" Background="Transparent" BorderBrush="Black" HorizontalAlignment="Left" Margin="740,10,0,0" VerticalAlignment="Top" Height="39" Width="40" Click="Close_Click">
+            <Image Source="/Resources/close.png" Stretch="Uniform" Width="40" RenderTransformOrigin="0.512,0.5"/>
+        </Button>
+    </Grid>
+</Window>

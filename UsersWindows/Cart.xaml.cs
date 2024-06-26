@@ -91,6 +91,25 @@ namespace AnalyticsSystem.UsersWindows
 
                         foreach (var item in cartItems)
                         {
+                            string imagePath = System.IO.Path.Combine("C:\\Users\\andre\\source\\repos\\AnalyticsSystem", item.SystemMetrics.ImageURL.TrimStart('/'));
+                            try
+                            {
+                                if (File.Exists(imagePath))
+                                {
+                                    iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(imagePath);
+                                    image.ScaleToFit(100f, 100f);
+                                    doc.Add(image);
+                                }
+                                else
+                                {
+                                    doc.Add(new Paragraph("Изображение не найдено: " + imagePath, font));
+                                }
+                            }
+                            catch (Exception imgEx)
+                            {
+                                doc.Add(new Paragraph("Ошибка загрузки изображения: " + imgEx.Message, font));
+                            }
+
                             doc.Add(new Paragraph("Название: " + item.SystemMetrics.MetricName, font));
                             doc.Add(new Paragraph("Значение: " + item.SystemMetrics.MetricValue, font));
                             doc.Add(new Paragraph("Цена: " + item.SystemMetrics.Price.ToString("F2") + " руб.", font));
@@ -111,6 +130,8 @@ namespace AnalyticsSystem.UsersWindows
                 doc.Close();
             }
         }
+
+
 
         private void UpdateOrderStatus()
         {
@@ -151,6 +172,8 @@ namespace AnalyticsSystem.UsersWindows
                     ClearCart();
                     MessageBox.Show("PDF документ заказа успешно сформирован!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                     LoadCartItems();
+                    new OrderWindow().Show();
+
                 }
                 catch (Exception ex)
                 {
