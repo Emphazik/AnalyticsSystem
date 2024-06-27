@@ -80,8 +80,14 @@
     <Compile Include="AdminTools\AddMetriks.xaml.cs">
       <DependentUpon>AddMetriks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminTools\AdminOrderEdit.xaml.cs">
+      <DependentUpon>AdminOrderEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminTools\EditMetriks.xaml.cs">
       <DependentUpon>EditMetriks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminTools\EditOrderUser.xaml.cs">
+      <DependentUpon>EditOrderUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminTools\MetriksAdmin.xaml.cs">
       <DependentUpon>MetriksAdmin.xaml</DependentUpon>
@@ -171,7 +177,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdminTools\AdminOrderEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminTools\EditMetriks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminTools\EditOrderUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

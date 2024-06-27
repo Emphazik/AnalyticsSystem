@@ -11,16 +11,30 @@ namespace AnalyticsSystem.AdminTools
     {
         public static AnalyticsSystemEntities analyticsSystemEntities;
 
-        // Поле для хранения текущей редактируемой метрики
+        private SystemMetrics MetricsToEdit;
         private SystemMetrics currentMetric = null;
 
         public EditMetriks(SystemMetrics metric)
         {
             InitializeComponent();
             analyticsSystemEntities = new AnalyticsSystemEntities();
-            LoadMetricForEdit(metric);
+            MetricsToEdit = metric; 
+            LoadMetricForEdit();
         }
 
+        private void LoadMetricForEdit()
+        {
+            if(MetricsToEdit!= null)
+            {
+                IdTextBox.Text = MetricsToEdit.idMetric.ToString();
+                MetricNameTextBox.Text = MetricsToEdit.MetricName;
+                MetricValueTextBox.Text = MetricsToEdit.MetricValue;
+                TimestampDatePicker.SelectedDate = MetricsToEdit.Timestamp;
+                PriceTextBox.Text = MetricsToEdit.Price.ToString();
+                ImageURLTextBox.Text = MetricsToEdit.ImageURL;
+            }
+            
+        }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -56,46 +70,37 @@ namespace AnalyticsSystem.AdminTools
 
         private void AddMetric_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if(MetricsToEdit != null)
             {
-                if (currentMetric != null)
+                try
                 {
-                    currentMetric.MetricName = MetricNameTextBox.Text;
-                    currentMetric.MetricValue = MetricValueTextBox.Text;
-                    currentMetric.Timestamp = TimestampDatePicker.SelectedDate.Value;
-                    currentMetric.Price = decimal.Parse(PriceTextBox.Text);
-                    currentMetric.ImageURL = ImageURLTextBox.Text;
-
-                    analyticsSystemEntities.SaveChanges();
-
-                    var updatedMetric = currentMetric;
-                    var mainWindow = Application.Current.Windows.OfType<MetriksAdmin>().FirstOrDefault();
-                    if (mainWindow != null)
+                    using( var context = new AnalyticsSystemEntities())
                     {
-                        mainWindow.UpdateMetricInList(updatedMetric);
+                        SystemMetrics existingMetriks = context.SystemMetrics.FirstOrDefault(s => s.idMetric == MetricsToEdit.idMetric);
+                        if (existingMetriks != null)
+                        {
+                            existingMetriks.MetricName = MetricNameTextBox.Text;
+                            existingMetriks.MetricValue = MetricValueTextBox.Text;
+                            existingMetriks.Timestamp = TimestampDatePicker.SelectedDate.Value;
+                            existingMetriks.Price = decimal.Parse(PriceTextBox.Text);
+                            existingMetriks.ImageURL = ImageURLTextBox.Text;
+
+                            context.SaveChanges();
+                            MessageBox.Show("Метрика успешно обновлена.");
+                            new MetriksAdmin().Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Метрик не найден");
+                        }
                     }
-
-                    MessageBox.Show("Метрика успешно обновлена.");
-                    this.Close();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Произошла ошибка при редактировании метрики: " + ex.Message);
-            }
-        }
-
-
-        private void LoadMetricForEdit(SystemMetrics metric)
-        {
-            currentMetric = metric;
-
-            IdTextBox.Text = metric.idMetric.ToString();
-            MetricNameTextBox.Text = metric.MetricName;
-            MetricValueTextBox.Text = metric.MetricValue;
-            TimestampDatePicker.SelectedDate = metric.Timestamp;
-            PriceTextBox.Text = metric.Price.ToString();
-            ImageURLTextBox.Text = metric.ImageURL;
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Произошла ошибка при редактировании метрики: " + ex.Message);
+                }
+            }   
         }
     }
 }

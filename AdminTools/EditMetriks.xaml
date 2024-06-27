@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalyticsSystem.AdminTools"
         mc:Ignorable="d"
-            Title="Админ-Страница Добавление Метриков.MonitoringAnalyticsSystem" Height="800" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/Resources/MarketAnalyticLogo2.png">
+        Title="Админ-Страница Добавление Метриков.MonitoringAnalyticsSystem" Height="800" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/Resources/MarketAnalyticLogo2.png">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">

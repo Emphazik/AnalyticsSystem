@@ -22,6 +22,7 @@ namespace AnalyticsSystem.AdminTools
     /// </summary>
     public partial class MetriksAdmin : Window
     {
+        private SystemMetrics currentMetric = null;
         private ObservableCollection<SystemMetrics> Metrics { get; set; }
         private ObservableCollection<SystemMetrics> FilteredMetrics { get; set; }
 
@@ -89,7 +90,9 @@ namespace AnalyticsSystem.AdminTools
                 if (metric != null)
                 {
                     var editMetriksWindow = new EditMetriks(metric);
-                    editMetriksWindow.ShowDialog();
+                    editMetriksWindow.Show();
+                    this.Close();
+
                     LoadMetrics();
                 }
             }
@@ -100,14 +103,12 @@ namespace AnalyticsSystem.AdminTools
             var existingMetric = Metrics.FirstOrDefault(m => m.idMetric == updatedMetric.idMetric);
             if (existingMetric != null)
             {
-                // Обновляем значения существующей метрики
                 existingMetric.MetricName = updatedMetric.MetricName;
                 existingMetric.MetricValue = updatedMetric.MetricValue;
                 existingMetric.Timestamp = updatedMetric.Timestamp;
                 existingMetric.Price = updatedMetric.Price;
                 existingMetric.ImageURL = updatedMetric.ImageURL;
 
-                // Обновляем привязанную коллекцию
                 FilteredMetrics = new ObservableCollection<SystemMetrics>(Metrics);
                 metricsListView.ItemsSource = FilteredMetrics;
             }
@@ -115,39 +116,61 @@ namespace AnalyticsSystem.AdminTools
 
         private void DeleteBook_Click(object sender, RoutedEventArgs e)
         {
-            //var button = sender as Button;
-            //if (button != null)
+            var button = sender as Button;
+            if (button != null)
+            {
+                var metric = button.DataContext as SystemMetrics;
+                if (metric != null)
+                {
+                    if (MessageBox.Show($"Вы точно хотите удалить метрик '{metric.MetricName}'?", "Подтверждение удаления",
+                        MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            using (var context = new AnalyticsSystemEntities())
+                            {
+                                var existingBook = context.SystemMetrics.Find(metric.idMetric);
+                                if (existingBook != null)
+                                {
+                                    context.SystemMetrics.Remove(existingBook);
+                                    context.SaveChanges();
+                                    MessageBox.Show("Книга успешно удалена");
+                                    LoadMetrics();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Книга не найдена в базе данных");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Ошибка удаления книги: {ex.Message}");
+                        }
+                    }
+                }
+            }
+
+            //if (currentMetric != null)
             //{
-            //    var book = button.DataContext as Books;
-            //    if (book != null)
+            //    MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить эту метрику?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            //    if (result == MessageBoxResult.Yes)
             //    {
-            //        if (MessageBox.Show($"Вы точно хотите удалить книгу '{book.Title}'?", "Подтверждение удаления",
-            //            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            //        try
             //        {
-            //            try
-            //            {
-            //                using (var context = new BookStoreHEntities())
-            //                {
-            //                    var existingBook = context.Books.Find(book.idBook);
-            //                    if (existingBook != null)
-            //                    {
-            //                        context.Books.Remove(existingBook);
-            //                        context.SaveChanges();
-            //                        MessageBox.Show("Книга успешно удалена");
-            //                        LoadBooks();
-            //                    }
-            //                    else
-            //                    {
-            //                        MessageBox.Show("Книга не найдена в базе данных");
-            //                    }
-            //                }
-            //            }
-            //            catch (Exception ex)
-            //            {
-            //                MessageBox.Show($"Ошибка удаления книги: {ex.Message}");
-            //            }
+            //            AppConnect.analyticsSystemEntities.SystemMetrics.Remove(currentMetric);
+            //            AppConnect.analyticsSystemEntities.SaveChanges();
+            //            MessageBox.Show("Метрика успешно удалена.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show("Ошибка при удалении метрики: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             //        }
             //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Нет выбранной метрики для удаления.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             //}
         }
 
@@ -326,7 +349,8 @@ namespace AnalyticsSystem.AdminTools
 
         private void OrdersMenu_Click(object sender, RoutedEventArgs e)
         {
-            // Navigation code for orders menu
+            new AdminOrderEdit().Show();
+            this.Close();
         }
 
         private void SettingsMenu_Click(object sender, RoutedEventArgs e)

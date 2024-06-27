@@ -189,7 +189,8 @@ namespace AnalyticsSystem
 
         private void OrdersMenu_Click(object sender, RoutedEventArgs e)
         {
-            // Navigation code for orders menu
+            new AdminOrderEdit().Show();
+            this.Close();
         }
 
         private void SettingsMenu_Click(object sender, RoutedEventArgs e)
