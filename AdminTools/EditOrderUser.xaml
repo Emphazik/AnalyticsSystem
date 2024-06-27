@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalyticsSystem.AdminTools"
         mc:Ignorable="d"
-        Title="Редачим ЗАказ" Height="300" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/Resources/MarketAnalyticLogo2.png">
+        Title="Редачим Заказ" Height="300" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/Resources/MarketAnalyticLogo2.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,7 +13,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Edit Order" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
+        <TextBlock Text="Редактирования Заказа" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
 
         <StackPanel Grid.Row="1" Margin="10">
             <TextBlock Text="Status:" Margin="5"/>

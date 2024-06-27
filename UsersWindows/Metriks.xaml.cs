@@ -189,7 +189,7 @@ namespace AnalyticsSystem.UsersWindows
                             {
                                 idUser = userId,
                                 idStatus = 2,
-                                OrderDate = DateTime.Now // Add a valid date here if needed
+                                OrderDate = DateTime.Now 
                             };
                             context.Orders.Add(order);
                             context.SaveChanges();

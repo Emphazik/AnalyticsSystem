@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using AnalyticsSystem.AdminTools;
 using AnalyticsSystem.ApplicationData;
-using AnalyticsSystem.Models; // Обновите имя пространства имен при необходимости
+using AnalyticsSystem.Models;
 using System.Reflection;
 using Microsoft.Office.Interop.Excel;
 
@@ -103,7 +103,7 @@ namespace AnalyticsSystem
             }
             else
             {
-                MessageBox.Show("Please select a user to edit.");
+                MessageBox.Show("Пожалуйста, выберите пользователя для редактирования.");
             }
         }
 
@@ -117,7 +117,7 @@ namespace AnalyticsSystem
             }
             else
             {
-                MessageBox.Show("Please select a user to delete.");
+                MessageBox.Show("Пожалуйста, выберите пользователя для удаления.");
             }
         }
 
